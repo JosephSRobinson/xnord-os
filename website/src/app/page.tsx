@@ -7,10 +7,10 @@ export default function HomePage() {
         <Image
           src="/xnord-logo.png"
           alt="x-Nord OS"
-          width={240}
-          height={64}
-          className="h-16 w-auto invert mb-6"
-          style={{ objectFit: "contain" }}
+          width={220}
+          height={56}
+          className="h-14 w-auto mb-6"
+          style={{ filter: "invert(1)", objectFit: "contain" }}
           priority
         />
         <span className="text-[10px] font-mono tracking-[0.3em] text-[#4A90A4] uppercase mb-6">
