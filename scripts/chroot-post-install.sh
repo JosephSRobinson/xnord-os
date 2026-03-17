@@ -3,14 +3,10 @@
 
 set -e
 
-# Install required packages
-apt-get update
-apt-get install -y \
-    calamares \
-    flatpak \
-    plasma-discover \
-    plasma-discover-flatpak-backend \
-    || true
+# Install required packages (allow individual failures)
+apt-get update || true
+apt-get install -y calamares 2>/dev/null || true
+apt-get install -y flatpak plasma-discover plasma-discover-flatpak-backend 2>/dev/null || true
 
 # Install Ollama (if available) or prepare for manual install
 if command -v ollama &>/dev/null; then
@@ -29,8 +25,8 @@ fi
 
 # SDDM theme configured via copied xnord.conf
 
-# Add Flathub
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+# Add Flathub (if flatpak installed)
+command -v flatpak &>/dev/null && flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo 2>/dev/null || true
 
 # Update initramfs for Plymouth
 update-initramfs -u -k all 2>/dev/null || true
